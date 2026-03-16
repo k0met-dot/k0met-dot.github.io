@@ -1,7 +1,7 @@
 ---
-title: 포트 스캐닝과 Risky Port (1)
+title: 포트스캐닝과 Risky Port (1)
 date: 2025-10-09 16:00:00 +0900
-tags: ASM
+tags: ASM 포트스캐닝
 ---
 
 대부분의 공격 벡터는 새로운 제로데이 취약점보다는 기본적인 보안 설정 오류다. 관리자 페이지에 디폴트 계정을 사용하고 있거나, 패치를 제때 적용하지 않았거나, 망 분리를 제대로 해 놓지 않았을 수도 있다.
@@ -29,17 +29,16 @@ nmap 142.250.206.238
 |스캔 옵션|설명|
 |--------|----|
 |``-Pn``|모든 포트가 Open 상태라고 가정 (ICMP Ping 생략)|
-|``-sS``|스텔스 스캐닝 (TCP SYN 스캔)|
-|``-p1-65535``|풀 포트 스캐닝|
+|``-sS``|스텔스 스캔 (TCP SYN 스캔)|
+|``-p1-65535``|풀 포트 대상 스캔|
 |``-sV``|서비스 버전 정보 스캔|
-|``-sU``|UDP 포트 스캔|
-|``-T<0-5>``|스캐닝 속도 지정 (T5가 가장 빠름, 디폴트 속도는 T3)|
+|``-sU``|UDP 포트 대상 스캔|
+|``-T<0-5>``|스캔 속도 지정 (T5가 가장 빠름, 디폴트 속도는 T3)|
 
 ## Shodan.io
 간단하게 **쇼단**이라고 부른다. 열린 포트를 찾는 데 사용하지만, 엄밀히 말하면 포트스캐닝 도구보다는 크롤러에 가깝다.
 
-> 🗒️ **쇼단(Shodan.io)의 작동 원리**
-> 
+> #### 🗒️ 쇼단(Shodan.io)의 작동 원리  
 > 쇼단의 크롤러들은 배너를 찾기 위해 돌아다닌다. 즉 이 배너에 대한 정보를 사용자에게 돌려준다는 것이다. 배너란, 요청이 들어왔을 때 그에 대한 답으로 되돌려지는 정보들을 말한다. 요청에 응하는 서비스가 무엇이냐에 따라 이 배너는 소프트웨어 이름이나 버전 정보가 될 수도 있고, 설치 일자가 될 수도 있다. *([보안뉴스](https://www.boannews.com/media/view.asp?idx=72674))*
 
 어쨌건 쓰는 사람 입장에서는 포트스캐닝과 비슷하다. 다만 ``nmap``과는 다르게 도메인 네임으로는 검색할 수 없고, 직접 포트스캐닝을 수행하는 사이트는 아니기 때문에 문제 풀이를 위해 방금 올린 서버의 IP 주소 등에 대한 정보는 찾을 수 없다.
@@ -51,8 +50,8 @@ nmap 142.250.206.238
 오른쪽에서 각각의 정보가 수집된 시각들을 확인할 수 있다.
 
 # Risky Port
-위험 포트. 공격에 취약하고 열려 있는 네트워크 포트를 의미한다. 외부 접근이 필요하지 않은 서비스를 실행하는 중인 포트가 Open 상태라면 Risky Port라고 생각해도 무방하다.
-일반적인 웹 서버라면 80(HTTP), 443(HTTPS) 포트만 Open 상태인 것이 안전하다.
+공격에 취약하고 열려 있는 네트워크 포트를 의미한다. 외부 접근이 필요하지 않은 서비스를 실행하는 중인 포트가 Open 상태라면 Risky Port라고 생각해도 무방하다.
+일반적인 웹 서버의 경우 80(HTTP), 443(HTTPS) 포트만 Open 상태인 것이 안전하다.
 
 쉽게 공격 대상이 되는 '특히 더 위험한' 포트는 **원격 접속에 필요한** 포트나 **중요한 정보를 빼낼 수 있는** 포트다.
 
@@ -67,5 +66,11 @@ nmap 142.250.206.238
 |3389|RDP|원격 데스크탑|
 |5432|PostgreSQL|데이터베이스 (PostgreSQL 계열)|
 
-# 다음 글
-▶ <span style='background-color: #ffdce0; text-decoration: none'>[포트 스캐닝과 Risky Port (2)](https://k0met-dot.github.io/2025/10/09/port-scan-and-risky-port-2)</span>
+---
+
+<!-- 다음 게시글 박스 -->
+
+<a href="https://k0met-dot.github.io/2025/10/21/port-scan-and-risky-port-2" style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin:24px 0;border:1px solid #e0e0e0;border-radius:10px;background:#fafafa;text-decoration:none;color:inherit;transition:all 0.2s ease;box-shadow:0 1px 3px rgba(0,0,0,0.04);" onmouseover="this.style.backgroundColor='#f5f5f5'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.08)';" onmouseout="this.style.backgroundColor='#fafafa'; this.style.transform='none'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.04)';" >
+    <span style="font-size:13px;color:#666;">다음 게시글</span>
+    <span style="font-size:16px;font-weight:600;margin-top:4px;">포트스캐닝과 Risky Port (2)</span>
+</a>
